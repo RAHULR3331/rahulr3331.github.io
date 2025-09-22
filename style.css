@@ -74,7 +74,7 @@ body {
   font-weight: bold;
   color: #2c3e50;
   text-decoration: none;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #040404 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -161,7 +161,7 @@ body {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000000 0%, #764ba2 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -246,7 +246,7 @@ body {
 .btn-primary {
   background: rgba(255, 255, 255, 0.2);
   color: #667eea;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary:hover {
