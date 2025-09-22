@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,19 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
   <nav class="navbar">
     <div class="nav-container">
       <a href="#home" class="nav-logo">Rahul R</a>
-      
+
       <!-- Mobile Menu Toggle Button -->
       <div class="nav-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
-      
+
       <ul class="nav-menu">
         <li><a href="#home" class="nav-link">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
@@ -28,8 +30,8 @@
         <li><a href="#contact" class="nav-link">Contact</a></li>
         <!-- Resume Download in Navigation -->
         <li><a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="nav-link resume-nav-btn">
-          <i class="fas fa-download"></i> Resume
-        </a></li>
+            <i class="fas fa-download"></i> Resume
+          </a></li>
       </ul>
     </div>
   </nav>
@@ -69,8 +71,13 @@
       <h2 class="section-title">About Me</h2>
       <div class="about-content">
         <div class="about-text">
-          <p>I'm a passionate web developer and data analytics enthusiast currently pursuing my Master's in Computer Science with a specialization in Data Analytics. With a strong foundation in object-oriented programming and hands-on experience in full-stack development, I bridge the gap between technical implementation and data-driven decision making.</p>
-          <p>My journey spans from crafting responsive web applications using modern frameworks like Laravel to diving deep into datasets to extract meaningful insights. I'm particularly interested in how data can drive business solutions and improve user experiences.</p>
+          <p>I'm a passionate web developer and data analytics enthusiast currently pursuing my Master's in Computer
+            Science with a specialization in Data Analytics. With a strong foundation in object-oriented programming and
+            hands-on experience in full-stack development, I bridge the gap between technical implementation and
+            data-driven decision making.</p>
+          <p>My journey spans from crafting responsive web applications using modern frameworks like Laravel to diving
+            deep into datasets to extract meaningful insights. I'm particularly interested in how data can drive
+            business solutions and improve user experiences.</p>
           <!-- Resume Download in About Section -->
           <div class="resume-download-section">
             <h3>Want to know more about my experience?</h3>
@@ -150,7 +157,9 @@
             <i class="fas fa-chart-line project-icon"></i>
             <h3>Cirrhosis (Liver Disease) EDA & Prediction</h3>
           </div>
-          <p>Comprehensive exploratory data analysis and machine learning model development on a medical dataset containing 418 patient records with 20 clinical features. Implemented predictive algorithms to assess disease progression and risk factors.</p>
+          <p>Comprehensive exploratory data analysis and machine learning model development on a medical dataset
+            containing 418 patient records with 20 clinical features. Implemented predictive algorithms to assess
+            disease progression and risk factors.</p>
           <div class="project-tech">
             <span>Python</span>
             <span>Pandas</span>
@@ -168,7 +177,8 @@
             <i class="fas fa-book project-icon"></i>
             <h3>Chapter One - Laravel Bookstore</h3>
           </div>
-          <p>Full-stack web application built with Laravel featuring complete CRUD operations, user authentication, admin panel, and inventory management. Designed with responsive UI and secure payment integration.</p>
+          <p>Full-stack web application built with Laravel featuring complete CRUD operations, user authentication,
+            admin panel, and inventory management. Designed with responsive UI and secure payment integration.</p>
           <div class="project-tech">
             <span>Laravel</span>
             <span>PHP</span>
@@ -186,7 +196,9 @@
             <i class="fas fa-brain project-icon"></i>
             <h3>Indian Dance Forms Recognition</h3>
           </div>
-          <p>Deep learning computer vision project utilizing transfer learning with VGG16 and ResNet50 architectures to classify traditional Indian classical dance forms with high accuracy through image processing techniques.</p>
+          <p>Deep learning computer vision project utilizing transfer learning with VGG16 and ResNet50 architectures to
+            classify traditional Indian classical dance forms with high accuracy through image processing techniques.
+          </p>
           <div class="project-tech">
             <span>Python</span>
             <span>TensorFlow</span>
@@ -212,7 +224,8 @@
             <h3>Master of Science - Computer Science (Data Analytics)</h3>
             <h4>Rajagiri College of Social Sciences</h4>
             <span class="timeline-date">2023 - 2025</span>
-            <p>Specializing in Data Analytics with coursework in Machine Learning, Statistical Analysis, Database Management, and Big Data Technologies.</p>
+            <p>Specializing in Data Analytics with coursework in Machine Learning, Statistical Analysis, Database
+              Management, and Big Data Technologies.</p>
           </div>
         </div>
         <div class="timeline-item">
@@ -221,7 +234,8 @@
             <h3>Bachelor of Science - Computer Science & Applications</h3>
             <h4>Sri Krishna Arts & Science College</h4>
             <span class="timeline-date">2019 - 2022</span>
-            <p>Comprehensive study of computer science fundamentals including programming, data structures, algorithms, and software engineering principles.</p>
+            <p>Comprehensive study of computer science fundamentals including programming, data structures, algorithms,
+              and software engineering principles.</p>
           </div>
         </div>
         <div class="timeline-item">
@@ -230,7 +244,8 @@
             <h3>Higher Secondary Education</h3>
             <h4>Government HSS Agali</h4>
             <span class="timeline-date">2017 - 2019</span>
-            <p>Completed higher secondary education with focus on Science stream, building strong analytical and mathematical foundations.</p>
+            <p>Completed higher secondary education with focus on Science stream, building strong analytical and
+              mathematical foundations.</p>
           </div>
         </div>
       </div>
@@ -243,7 +258,8 @@
       <div class="contact-content">
         <div class="contact-info">
           <h3>Ready to collaborate?</h3>
-          <p>I'm always interested in new opportunities and exciting projects. Whether you have a question about my work or want to discuss a potential collaboration, feel free to reach out!</p>
+          <p>I'm always interested in new opportunities and exciting projects. Whether you have a question about my work
+            or want to discuss a potential collaboration, feel free to reach out!</p>
 
           <!-- Resume Download in Contact Section -->
           <div class="contact-resume-section">
@@ -327,16 +343,16 @@
 
   <script>
     // Mobile Navigation Toggle
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const navToggle = document.querySelector('.nav-toggle');
       const navMenu = document.querySelector('.nav-menu');
-      
+
       if (navToggle) {
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', function () {
           navMenu.classList.toggle('active');
           this.classList.toggle('active');
         });
-        
+
         // Close menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
           link.addEventListener('click', () => {
@@ -344,9 +360,9 @@
             navToggle.classList.remove('active');
           });
         });
-        
+
         // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
           if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
@@ -391,7 +407,7 @@
     const form = document.querySelector('.contact-form-element');
     const result = document.getElementById('result');
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
       const formData = new FormData(form);
       const object = Object.fromEntries(formData);
@@ -401,44 +417,44 @@
       result.style.display = "block";
 
       fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: json
-      })
-      .then(async (response) => {
-        let json = await response.json();
-        if (response.status == 200) {
-          result.innerHTML = "✅ Message sent successfully!";
-          result.classList.remove('error');
-          result.classList.add('success');
-        } else {
-          console.log(response);
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: json
+        })
+        .then(async (response) => {
+          let json = await response.json();
+          if (response.status == 200) {
+            result.innerHTML = "✅ Message sent successfully!";
+            result.classList.remove('error');
+            result.classList.add('success');
+          } else {
+            console.log(response);
+            result.innerHTML = "❌ Something went wrong!";
+            result.classList.remove('success');
+            result.classList.add('error');
+          }
+        })
+        .catch(error => {
+          console.log(error);
           result.innerHTML = "❌ Something went wrong!";
           result.classList.remove('success');
           result.classList.add('error');
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        result.innerHTML = "❌ Something went wrong!";
-        result.classList.remove('success');
-        result.classList.add('error');
-      })
-      .then(function() {
-        form.reset();
-        setTimeout(() => {
-          result.style.display = "none";
-          result.classList.remove('success', 'error');
-        }, 5000);
-      });
+        })
+        .then(function () {
+          form.reset();
+          setTimeout(() => {
+            result.style.display = "none";
+            result.classList.remove('success', 'error');
+          }, 5000);
+        });
     });
 
     // Resume Download Tracking (Optional Analytics)
     document.querySelectorAll('a[download]').forEach(link => {
-      link.addEventListener('click', function() {
+      link.addEventListener('click', function () {
         // You can add analytics tracking here
         console.log('Resume downloaded from:', this.className);
       });
@@ -455,4 +471,5 @@
     });
   </script>
 </body>
+
 </html>
