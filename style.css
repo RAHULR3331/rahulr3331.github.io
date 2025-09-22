@@ -215,7 +215,7 @@ body {
 
 .btn-primary {
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: rgb(87, 41, 41);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -265,8 +265,8 @@ body {
 }
 
 .btn-resume:hover {
-  background: white;
-  color: #764ba2;
+  background: rgb(60, 33, 33);
+  color: #483a57;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
