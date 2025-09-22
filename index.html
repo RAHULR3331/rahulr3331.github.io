@@ -11,6 +11,14 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="#home" class="nav-logo">Rahul R</a>
+      
+      <!-- Mobile Menu Toggle Button -->
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
       <ul class="nav-menu">
         <li><a href="#home" class="nav-link">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
@@ -66,14 +74,14 @@
           <!-- Resume Download in About Section -->
           <div class="resume-download-section">
             <h3>Want to know more about my experience?</h3>
-            <a href="resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-outline resume-download-btn">
+            <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-outline resume-download-btn">
               <i class="fas fa-file-pdf"></i> Download My Resume
             </a>
           </div>
         </div>
         <div class="stats">
           <div class="stat-item">
-            <h3>3+</h3>
+            <h3>5+</h3>
             <p>Years Learning</p>
           </div>
           <div class="stat-item">
@@ -294,7 +302,7 @@
             <div class="form-group">
               <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary"style="color: #667eea;">Send Message</button>
+            <button type="submit" class="btn btn-primary" style="color: #667eea;">Send Message</button>
           </form>
         </div>
       </div>
@@ -318,6 +326,35 @@
   </footer>
 
   <script>
+    // Mobile Navigation Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.querySelector('.nav-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      if (navToggle) {
+        navToggle.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          this.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+          });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+          }
+        });
+      }
+    });
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -361,6 +398,7 @@
       const json = JSON.stringify(object);
 
       result.innerHTML = "Please wait...";
+      result.style.display = "block";
 
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -374,22 +412,26 @@
         let json = await response.json();
         if (response.status == 200) {
           result.innerHTML = "✅ Message sent successfully!";
+          result.classList.remove('error');
           result.classList.add('success');
         } else {
           console.log(response);
           result.innerHTML = "❌ Something went wrong!";
+          result.classList.remove('success');
           result.classList.add('error');
         }
       })
       .catch(error => {
         console.log(error);
         result.innerHTML = "❌ Something went wrong!";
+        result.classList.remove('success');
         result.classList.add('error');
       })
       .then(function() {
         form.reset();
         setTimeout(() => {
           result.style.display = "none";
+          result.classList.remove('success', 'error');
         }, 5000);
       });
     });
