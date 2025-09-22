@@ -18,6 +18,10 @@
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#education" class="nav-link">Education</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
+        <!-- Resume Download in Navigation -->
+        <li><a href="resume.pdf" download="Rahul_R_Resume.pdf" class="nav-link resume-nav-btn">
+          <i class="fas fa-download"></i> Resume
+        </a></li>
       </ul>
     </div>
   </nav>
@@ -32,6 +36,10 @@
         <div class="hero-buttons">
           <a href="#projects" class="btn btn-primary">View My Work</a>
           <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+          <!-- Resume Download Button in Hero -->
+          <a href="resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-resume">
+            <i class="fas fa-download"></i> Download Resume
+          </a>
         </div>
         <div class="social-links">
           <a href="https://www.linkedin.com/in/rahul3339" target="_blank" title="LinkedIn">
@@ -55,10 +63,17 @@
         <div class="about-text">
           <p>I'm a passionate web developer and data analytics enthusiast currently pursuing my Master's in Computer Science with a specialization in Data Analytics. With a strong foundation in object-oriented programming and hands-on experience in full-stack development, I bridge the gap between technical implementation and data-driven decision making.</p>
           <p>My journey spans from crafting responsive web applications using modern frameworks like Laravel to diving deep into datasets to extract meaningful insights. I'm particularly interested in how data can drive business solutions and improve user experiences.</p>
+          <!-- Resume Download in About Section -->
+          <div class="resume-download-section">
+            <h3>Want to know more about my experience?</h3>
+            <a href="resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-outline resume-download-btn">
+              <i class="fas fa-file-pdf"></i> Download My Resume
+            </a>
+          </div>
         </div>
         <div class="stats">
           <div class="stat-item">
-            <h3>5+</h3>
+            <h3>3+</h3>
             <p>Years Learning</p>
           </div>
           <div class="stat-item">
@@ -175,27 +190,6 @@
             <a href="#" class="btn btn-small btn-outline">View Code</a>
           </div>
         </div>
-
-        <div class="project-card">
-  <div class="project-header">
-    <i class="fas fa-file-invoice project-icon"></i>
-    <h3>GST Billing Application</h3>
-  </div>
-  <p>Comprehensive billing system built with Laravel and MySQL, designed for businesses to simplify GST-based transactions. 
-     Features include customer management, item cataloging, bill creation, bill printing, and secure data backup. 
-     Developed with a responsive interface for seamless user experience.</p>
-  <div class="project-tech">
-    <span>Laravel</span>
-    <span>PHP</span>
-    <span>MySQL</span>
-    <span>Bootstrap</span>
-  </div>
-  <div class="project-links">
-    <a href="#" class="btn btn-small">Live Demo</a>
-    <a href="#" class="btn btn-small btn-outline">View Code</a>
-  </div>
-</div>
-
       </div>
     </div>
   </section>
@@ -242,6 +236,15 @@
         <div class="contact-info">
           <h3>Ready to collaborate?</h3>
           <p>I'm always interested in new opportunities and exciting projects. Whether you have a question about my work or want to discuss a potential collaboration, feel free to reach out!</p>
+
+          <!-- Resume Download in Contact Section -->
+          <div class="contact-resume-section">
+            <h4>📄 Looking for my detailed experience?</h4>
+            <p>Download my resume to see my complete professional background, certifications, and project details.</p>
+            <a href="resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-primary resume-contact-btn">
+              <i class="fas fa-download"></i> Download Resume (PDF)
+            </a>
+          </div>
 
           <div class="contact-methods">
             <div class="contact-method">
@@ -300,6 +303,13 @@
 
   <!-- Success/Error Messages -->
   <div id="result" class="form-result"></div>
+
+  <!-- Floating Resume Download Button -->
+  <div class="floating-resume-btn">
+    <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" title="Download Resume">
+      <i class="fas fa-file-download"></i>
+    </a>
+  </div>
 
   <footer class="footer">
     <div class="container">
@@ -382,6 +392,24 @@
           result.style.display = "none";
         }, 5000);
       });
+    });
+
+    // Resume Download Tracking (Optional Analytics)
+    document.querySelectorAll('a[download]').forEach(link => {
+      link.addEventListener('click', function() {
+        // You can add analytics tracking here
+        console.log('Resume downloaded from:', this.className);
+      });
+    });
+
+    // Show floating resume button after scrolling
+    window.addEventListener('scroll', () => {
+      const floatingBtn = document.querySelector('.floating-resume-btn');
+      if (window.scrollY > 500) {
+        floatingBtn.style.display = 'block';
+      } else {
+        floatingBtn.style.display = 'none';
+      }
     });
   </script>
 </body>
