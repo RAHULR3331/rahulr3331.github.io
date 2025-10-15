@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,50 +7,51 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-<link rel="manifest" href="images/site.webmanifest">
-
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="manifest" href="images/site.webmanifest">
 </head>
-
 <body>
+
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="#home" class="nav-logo">Rahul R</a>
-
-      <!-- Mobile Menu Toggle Button -->
       <div class="nav-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
-
       <ul class="nav-menu">
         <li><a href="#home" class="nav-link">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
         <li><a href="#education" class="nav-link">Education</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
-        <!-- Resume Download in Navigation -->
-        <li><a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="nav-link resume-nav-btn">
+        <li>
+          <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="nav-link resume-nav-btn">
             <i class="fas fa-download"></i> Resume
-          </a></li>
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
 
+  <!-- Hero -->
   <section id="home" class="hero">
     <div class="hero-container">
       <div class="hero-content">
         <img src="images/profile.jpg" alt="Rahul R - Web Developer" class="profile-img">
         <h1>Rahul R</h1>
         <p class="hero-subtitle">Web Developer | Data Analytics Enthusiast</p>
-        <p class="hero-description">Transforming data into insights and crafting digital experiences</p>
+        <p class="hero-description">
+          Transforming data into insights and crafting digital experiences
+        </p>
         <div class="hero-buttons">
-          <a href="#projects" class="btn btn-secondary" style="color: white;">View My Work</a>
+          <a href="#projects" class="btn btn-secondary">View My Work</a>
           <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-          <!-- Resume Download Button in Hero -->
           <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-resume">
             <i class="fas fa-download"></i> Download Resume
           </a>
@@ -71,21 +71,16 @@
     </div>
   </section>
 
+  <!-- About -->
   <section id="about" class="section">
     <div class="container">
       <h2 class="section-title">About Me</h2>
       <div class="about-content">
         <div class="about-text">
-          <p>I'm a passionate web developer and data analytics enthusiast currently pursuing my Master's in Computer
-            Science with a specialization in Data Analytics. With a strong foundation in object-oriented programming and
-            hands-on experience in full-stack development, I bridge the gap between technical implementation and
-            data-driven decision making.</p>
-          <p>My journey spans from crafting responsive web applications using modern frameworks like Laravel to diving
-            deep into datasets to extract meaningful insights. I'm particularly interested in how data can drive
-            business solutions and improve user experiences.</p>
-          <!-- Resume Download in About Section -->
+          <p>I'm a passionate web developer and data analytics enthusiast currently pursuing my Master's in Computer Science with a specialization in Data Analytics. With strong object-oriented programming and full-stack experience, I bridge the gap between technical implementation and data-driven decision making.</p>
+          <p>My journey spans responsive web applications and deep dataset explorations. I aim to leverage data for business solutions and better user experiences.</p>
           <div class="resume-download-section">
-            <h3>Want to know more about my experience?</h3>
+            <h3>Want to know more?</h3>
             <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-outline resume-download-btn">
               <i class="fas fa-file-pdf"></i> Download My Resume
             </a>
@@ -109,6 +104,7 @@
     </div>
   </section>
 
+  <!-- Skills -->
   <section id="skills" class="section bg-light">
     <div class="container">
       <h2 class="section-title">Technical Skills</h2>
@@ -153,6 +149,7 @@
     </div>
   </section>
 
+  <!-- Projects -->
   <section id="projects" class="section">
     <div class="container">
       <h2 class="section-title">Featured Projects</h2>
@@ -162,9 +159,7 @@
             <i class="fas fa-chart-line project-icon"></i>
             <h3>Cirrhosis (Liver Disease) EDA & Prediction</h3>
           </div>
-          <p>Comprehensive exploratory data analysis and machine learning model development on a medical dataset
-            containing 418 patient records with 20 clinical features. Implemented predictive algorithms to assess
-            disease progression and risk factors.</p>
+          <p>Comprehensive data analysis and ML model development on a medical dataset for disease progression and risk assessment.</p>
           <div class="project-tech">
             <span>Python</span>
             <span>Pandas</span>
@@ -176,14 +171,12 @@
             <a href="#" class="btn btn-small btn-outline">View Code</a>
           </div>
         </div>
-
         <div class="project-card">
           <div class="project-header">
             <i class="fas fa-book project-icon"></i>
             <h3>Chapter One - Laravel Bookstore</h3>
           </div>
-          <p>Full-stack web application built with Laravel featuring complete CRUD operations, user authentication,
-            admin panel, and inventory management. Designed with responsive UI and secure payment integration.</p>
+          <p>Full-stack Laravel app with CRUD, authentication, admin panel, and payment integration. Responsive UI.</p>
           <div class="project-tech">
             <span>Laravel</span>
             <span>PHP</span>
@@ -195,15 +188,12 @@
             <a href="#" class="btn btn-small btn-outline">View Code</a>
           </div>
         </div>
-
         <div class="project-card">
           <div class="project-header">
             <i class="fas fa-brain project-icon"></i>
             <h3>Indian Dance Forms Recognition</h3>
           </div>
-          <p>Deep learning computer vision project utilizing transfer learning with VGG16 and ResNet50 architectures to
-            classify traditional Indian classical dance forms with high accuracy through image processing techniques.
-          </p>
+          <p>Deep learning and computer vision project; transfer learning with VGG16/ResNet50 for accurate dance form classification.</p>
           <div class="project-tech">
             <span>Python</span>
             <span>TensorFlow</span>
@@ -219,6 +209,50 @@
     </div>
   </section>
 
+  <!-- Professional Experience -->
+  <section id="experience" class="section bg-dark">
+    <div class="container">
+      <div class="exp-title-row">
+        <h2 class="section-title">Professional Experience</h2>
+        <div id="exp-info-box" class="exp-info-box">
+          <span class="exp-info-label">Total Experience</span>
+          <span id="exp-total-txt" class="exp-info-value">Calculating...</span>
+        </div>
+      </div>
+      <div class="exp-group">
+        <h3 class="exp-heading"><i class="fas fa-briefcase"></i> Work Experience</h3>
+        <div class="exp-item">
+          <h4>Software Development and Deployment Trainee</h4>
+          <span class="exp-org">Texila Educational and Management Services (P) Ltd · Coimbatore, Tamil Nadu · Full-time</span>
+          <span class="exp-date">Oct 2025 - Present</span>
+          <p>Developing scalable software, cross-functional collaboration. <br>Technologies: Laravel, HTML5, JavaScript.</p>
+        </div>
+        <div class="exp-item">
+          <h4>Software Developer</h4>
+          <span class="exp-org">Meta Soft · Coimbatore, Tamil Nadu · Full-time</span>
+          <span class="exp-date">Apr 2025 - Oct 2025 - 8 Months</span>
+          <p>Development, testing, web automation.<br>Technologies: Laravel, HTML5, PHP.</p>
+        </div>
+      </div>
+      <div class="exp-group">
+        <h3 class="exp-heading"><i class="fas fa-user-graduate"></i> Internship Experience</h3>
+        <div class="exp-item">
+          <h4>Data Analyst Intern</h4>
+          <span class="exp-org">ICT Global Tech Pvt Ltd · Kochi, Kerala · Internship</span>
+          <span class="exp-date">Jan 2025 - Mar 2025 - 3 Months</span>
+          <p>Statistical analysis, CRM optimization, hands-on pipelines.<br>Tools: Excel, Python.</p>
+        </div>
+        <div class="exp-item">
+          <h4>Full-stack Developer Intern</h4>
+          <span class="exp-org">Luminar Technolab · Kochi, Kerala · Internship</span>
+          <span class="exp-date">Aug 2022 - Mar 2023 - 8 Months</span>
+          <p>Developed Angular web apps, enhanced UI/UX.<br>Technologies: Angular, HTML, CSS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
   <section id="education" class="section bg-light">
     <div class="container">
       <h2 class="section-title">Education</h2>
@@ -229,8 +263,7 @@
             <h3>Master of Science - Computer Science (Data Analytics)</h3>
             <h4>Rajagiri College of Social Sciences</h4>
             <span class="timeline-date">2023 - 2025</span>
-            <p>Specializing in Data Analytics with coursework in Machine Learning, Statistical Analysis, Database
-              Management, and Big Data Technologies.</p>
+            <p>Specialized in Data Analytics, ML, Database, Big Data.</p>
           </div>
         </div>
         <div class="timeline-item">
@@ -239,8 +272,7 @@
             <h3>Bachelor of Science - Computer Science & Applications</h3>
             <h4>Sri Krishna Arts & Science College</h4>
             <span class="timeline-date">2019 - 2022</span>
-            <p>Comprehensive study of computer science fundamentals including programming, data structures, algorithms,
-              and software engineering principles.</p>
+            <p>Programming, algorithms, software engineering fundamentals.</p>
           </div>
         </div>
         <div class="timeline-item">
@@ -249,32 +281,28 @@
             <h3>Higher Secondary Education</h3>
             <h4>Government HSS Agali</h4>
             <span class="timeline-date">2017 - 2019</span>
-            <p>Completed higher secondary education with focus on Science stream, building strong analytical and
-              mathematical foundations.</p>
+            <p>Science stream, strong analytical & math foundations.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Contact -->
   <section id="contact" class="section">
     <div class="container">
       <h2 class="section-title">Let's Connect</h2>
       <div class="contact-content">
         <div class="contact-info">
           <h3>Ready to collaborate?</h3>
-          <p>I'm always interested in new opportunities and exciting projects. Whether you have a question about my work
-            or want to discuss a potential collaboration, feel free to reach out!</p>
-
-          <!-- Resume Download in Contact Section -->
+          <p>I'm interested in new opportunities and projects. Questions or want to collaborate? Reach out!</p>
           <div class="contact-resume-section">
             <h4>📄 Looking for my detailed experience?</h4>
-            <p>Download my resume to see my complete professional background, certifications, and project details.</p>
+            <p>Download my resume for comprehensive background.</p>
             <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-primary resume-contact-btn">
               <i class="fas fa-download"></i> Download Resume (PDF)
             </a>
           </div>
-
           <div class="contact-methods">
             <div class="contact-method">
               <i class="fas fa-envelope"></i>
@@ -299,18 +327,12 @@
             </div>
           </div>
         </div>
-
-        <!-- WORKING CONTACT FORM -->
         <div class="contact-form">
           <h3>Send me a message</h3>
           <form action="https://api.web3forms.com/submit" method="POST" class="contact-form-element">
-            <!-- Replace YOUR_ACCESS_KEY with actual key from web3forms.com -->
             <input type="hidden" name="access_key" value="1eaa5a7d-26df-48b8-9618-5d5fc93a264a">
-
-            <!-- Honeypot Spam Protection -->
             <input type="hidden" name="redirect" value="https://web3forms.com/success">
             <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-
             <div class="form-group">
               <input type="text" name="name" placeholder="Your Name" required>
             </div>
@@ -323,15 +345,12 @@
             <div class="form-group">
               <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" style="color: #667eea;">Send Message</button>
+            <button type="submit" class="btn btn-primary" style="color:#fff;">Send Message</button>
           </form>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Success/Error Messages -->
-  <div id="result" class="form-result"></div>
 
   <!-- Floating Resume Download Button -->
   <div class="floating-resume-btn">
@@ -340,33 +359,30 @@
     </a>
   </div>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <p>&copy; 2025 Rahul R. All Rights Reserved. Built with passion and attention to detail.</p>
     </div>
   </footer>
 
+  <!-- Scripts for interactivity and live experience box-->
   <script>
     // Mobile Navigation Toggle
     document.addEventListener('DOMContentLoaded', function () {
       const navToggle = document.querySelector('.nav-toggle');
       const navMenu = document.querySelector('.nav-menu');
-
       if (navToggle) {
         navToggle.addEventListener('click', function () {
           navMenu.classList.toggle('active');
           this.classList.toggle('active');
         });
-
-        // Close menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
           link.addEventListener('click', () => {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
           });
         });
-
-        // Close menu when clicking outside
         document.addEventListener('click', function (event) {
           if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
             navMenu.classList.remove('active');
@@ -386,87 +402,24 @@
       });
     });
 
-    // Add active class to navigation links
+    // Navigation link active state on scroll
     window.addEventListener('scroll', () => {
       const sections = document.querySelectorAll('section');
       const navLinks = document.querySelectorAll('.nav-link');
-
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (scrollY >= (sectionTop - 200)) {
           current = section.getAttribute('id');
         }
       });
-
       navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').substring(1) === current) {
           link.classList.add('active');
         }
       });
-    });
-
-    // Contact Form Handling
-    const form = document.querySelector('.contact-form-element');
-    const result = document.getElementById('result');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const object = Object.fromEntries(formData);
-      const json = JSON.stringify(object);
-
-      result.innerHTML = "Please wait...";
-      result.style.display = "block";
-
-      fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: json
-        })
-        .then(async (response) => {
-          let json = await response.json();
-          if (response.status == 200) {
-            result.innerHTML = "✅ Message sent successfully!";
-            result.classList.remove('error');
-            result.classList.add('success');
-          } else {
-            console.log(response);
-            result.innerHTML = "❌ Something went wrong!";
-            result.classList.remove('success');
-            result.classList.add('error');
-          }
-        })
-        .catch(error => {
-          console.log(error);
-          result.innerHTML = "❌ Something went wrong!";
-          result.classList.remove('success');
-          result.classList.add('error');
-        })
-        .then(function () {
-          form.reset();
-          setTimeout(() => {
-            result.style.display = "none";
-            result.classList.remove('success', 'error');
-          }, 5000);
-        });
-    });
-
-    // Resume Download Tracking (Optional Analytics)
-    document.querySelectorAll('a[download]').forEach(link => {
-      link.addEventListener('click', function () {
-        // You can add analytics tracking here
-        console.log('Resume downloaded from:', this.className);
-      });
-    });
-
-    // Show floating resume button after scrolling
-    window.addEventListener('scroll', () => {
+      // Floating resume button
       const floatingBtn = document.querySelector('.floating-resume-btn');
       if (window.scrollY > 500) {
         floatingBtn.style.display = 'block';
@@ -474,7 +427,51 @@
         floatingBtn.style.display = 'none';
       }
     });
+
+    // ---- Experience Calculation (Live) ----
+    // Update start date as needed; intervals must not overlap
+    const workDates = [
+      { from: "2022-08-01", to: "2023-03-31" }, // Luminar Technolab Internship
+      { from: "2025-01-01", to: "2025-03-31" }, // ICT Global Tech Internship
+      { from: "2025-04-01", to: "2025-10-16" }, // Meta Soft (ends on your last day there)
+      { from: "2025-10-16", to: null } // Current Texila Educational (ongoing)
+    ];
+
+    function calcExpTotal(workArr) {
+      let intervals = workArr.map(job => {
+        let from = new Date(job.from);
+        let to = job.to ? new Date(job.to) : new Date();
+        return [from, to];
+      });
+
+      // Merge intervals if overlapping
+      intervals.sort((a, b) => a[0] - b[0]);
+      let merged = [];
+      for (const [start, end] of intervals) {
+        if (!merged.length || merged[merged.length-1][1] < start) {
+          merged.push([start, end]);
+        } else {
+          merged[merged.length-1][1] = new Date(Math.max(merged[merged.length-1][1], end));
+        }
+      }
+
+      let totalMs = merged.reduce((sum, [start, end]) => sum + (end - start), 0);
+      let years = Math.floor(totalMs/(365.25*24*60*60*1000));
+      let months = Math.floor((totalMs % (365.25*24*60*60*1000))/(30.44*24*60*60*1000));
+
+      return { years, months };
+    }
+
+    function updateExpBox() {
+      const { years, months } = calcExpTotal(workDates);
+      let txt = '';
+      if (years > 0) txt += `${years} year${years>1?'s':''} `;
+      txt += `${months} month${months!==1?'s':''}`;
+      document.getElementById('exp-total-txt').textContent = txt;
+    }
+
+    updateExpBox();
+    setInterval(updateExpBox, 60*60*1000);
   </script>
 </body>
-
 </html>
