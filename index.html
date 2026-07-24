@@ -149,22 +149,30 @@ img{max-width:100%; display:block;}
 .hero-social a{width:42px; height:42px; border-radius:50%; border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; color:var(--text-dim); transition:.25s;}
 .hero-social a:hover{color:var(--ink); background:var(--cyan); border-color:var(--cyan); transform:translateY(-3px);}
 
-/* Data trace signature visual */
-.trace-card{
-  position:relative; background:var(--glass); border:1px solid var(--glass-border); border-radius:24px;
-  padding:28px; backdrop-filter:blur(18px); box-shadow:0 30px 80px -30px rgba(0,0,0,.5);
+/* Terminal signature visual */
+.term-card{
+  position:relative; background:var(--glass); border:1px solid var(--glass-border); border-radius:20px;
+  backdrop-filter:blur(18px); box-shadow:0 30px 80px -30px rgba(0,0,0,.5); overflow:hidden;
 }
-.trace-head{display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-bottom:14px;}
-.trace-head .live{color:#3ddc84; display:flex; align-items:center; gap:6px;}
-.trace-svg{width:100%; height:auto; display:block;}
-.trace-path{fill:none; stroke:url(#traceGrad); stroke-width:2; stroke-linecap:round;}
-.trace-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px;}
-.trace-stat{background:var(--ink-3); border:1px solid var(--glass-border); border-radius:12px; padding:12px 10px; text-align:center;}
-.trace-stat .n{font-family:var(--font-display); font-size:21px; font-weight:600; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
-.trace-stat .l{font-family:var(--font-mono); font-size:10px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
-.profile-chip{position:absolute; top:-18px; right:20px; display:flex; align-items:center; gap:10px; background:var(--ink-3); border:1px solid var(--glass-border); padding:6px 14px 6px 6px; border-radius:100px; box-shadow:0 10px 24px -10px rgba(0,0,0,.5);}
-.profile-chip img{width:34px; height:34px; border-radius:50%; object-fit:cover;}
-.profile-chip span{font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim);}
+.term-titlebar{display:flex; align-items:center; gap:14px; padding:14px 18px; border-bottom:1px solid var(--glass-border); background:var(--ink-3);}
+.term-dots{display:flex; gap:7px;}
+.term-dots span{width:10px; height:10px; border-radius:50%; display:block;}
+.term-dots span:nth-child(1){background:#FF5F57;}
+.term-dots span:nth-child(2){background:#FEBC2E;}
+.term-dots span:nth-child(3){background:#28C840;}
+.term-tab{display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim); margin:0 auto;}
+.term-tab img{width:18px; height:18px; border-radius:50%; object-fit:cover;}
+.term-body{padding:22px 20px 20px; font-family:var(--font-mono); font-size:13px; min-height:230px;}
+.term-line{margin-bottom:12px; line-height:1.7;}
+.term-prompt{color:var(--cyan);}
+.term-prompt::before{content:'❯ '; color:var(--text-faint);}
+.term-output{color:var(--text-dim); white-space:pre-wrap;}
+.term-output .hl{color:var(--text);}
+.term-caret{display:inline-block; width:7px; height:14px; background:var(--cyan); vertical-align:middle; margin-left:2px; animation:blink 1s steps(1) infinite;}
+.term-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:0 20px 22px;}
+.term-stat{background:var(--ink-3); border:1px solid var(--glass-border); border-radius:12px; padding:12px 10px; text-align:center;}
+.term-stat .n{font-family:var(--font-display); font-size:21px; font-weight:600; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.term-stat .l{font-family:var(--font-mono); font-size:10px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
 
 /* scroll cue */
 .scroll-cue{position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--text-faint); font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;}
@@ -338,28 +346,16 @@ img{max-width:100%; display:block;}
     </div>
 
     <div class="reveal">
-      <div class="trace-card">
-        <div class="profile-chip">
-          <img src="images/profile.jpg" alt="Rahul R">
-          <span>@RAHULR3331</span>
+      <div class="term-card">
+        <div class="term-titlebar">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <div class="term-tab"><img src="images/profile.jpg" alt="Rahul R"> rahul@portfolio: ~</div>
         </div>
-        <div class="trace-head">
-          <span>signal.ts — dataset_variance</span>
-          <span class="live"><i class="fa-solid fa-circle" style="font-size:6px;"></i> live</span>
-        </div>
-        <svg class="trace-svg" viewBox="0 0 340 110" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="traceGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#5EE7FF"/>
-              <stop offset="100%" stop-color="#B06CFF"/>
-            </linearGradient>
-          </defs>
-          <path id="tracePath" class="trace-path" d="M0,70 L340,70"/>
-        </svg>
-        <div class="trace-stats">
-          <div class="trace-stat"><div class="n">15+</div><div class="l">Projects</div></div>
-          <div class="trace-stat"><div class="n">5+</div><div class="l">Technologies</div></div>
-          <div class="trace-stat"><div class="n">2+ yrs</div><div class="l">Experience</div></div>
+        <div class="term-body" id="termBody"></div>
+        <div class="term-stats">
+          <div class="term-stat"><div class="n">15+</div><div class="l">Projects</div></div>
+          <div class="term-stat"><div class="n">5+</div><div class="l">Technologies</div></div>
+          <div class="term-stat"><div class="n">2+ yrs</div><div class="l">Experience</div></div>
         </div>
       </div>
     </div>
@@ -659,21 +655,61 @@ function typeLoop(){
 }
 typeLoop();
 
-/* ============ TRACE PATH DRAW ============ */
-function randTrace(){
-  let d = 'M0,70';
-  for(let x=0;x<=340;x+=17){
-    const y = 70 + Math.sin(x/22 + performance.now()/900) * 24 + (Math.random()*6-3);
-    d += ` L${x},${Math.max(14,Math.min(96,y)).toFixed(1)}`;
+/* ============ TERMINAL TYPEWRITER ============ */
+const termScript = [
+  { cmd:'whoami', out:'Rahul R — <span class="hl">Full-Stack Developer</span> & <span class="hl">Data Analyst</span>' },
+  { cmd:'cat focus.txt', out:'Laravel · PHP · Python · ML/EDA\nMSc Computer Science — Data Analytics' },
+  { cmd:'./status --check', out:'build: <span class="hl">passing</span>\navailability: <span class="hl">open to work</span>' },
+];
+const termBody = document.getElementById('termBody');
+let sIndex = 0;
+
+function typeText(el, text, speed, cb){
+  let i = 0;
+  const caret = document.createElement('span');
+  caret.className = 'term-caret';
+  el.appendChild(caret);
+  const timer = setInterval(()=>{
+    if(i < text.length){
+      caret.insertAdjacentHTML('beforebegin', text[i]);
+      i++;
+    } else {
+      clearInterval(timer);
+      if(cb) cb();
+    }
+  }, speed);
+}
+
+function runTermScript(){
+  termBody.innerHTML = '';
+  sIndex = 0;
+  nextLine();
+}
+function nextLine(){
+  if(sIndex >= termScript.length){
+    setTimeout(runTermScript, 3200);
+    return;
   }
-  return d;
+  const step = termScript[sIndex];
+  const cmdLine = document.createElement('div');
+  cmdLine.className = 'term-line';
+  const promptSpan = document.createElement('span');
+  promptSpan.className = 'term-prompt';
+  cmdLine.appendChild(promptSpan);
+  termBody.appendChild(cmdLine);
+
+  typeText(promptSpan, step.cmd, 42, ()=>{
+    setTimeout(()=>{
+      const outLine = document.createElement('div');
+      outLine.className = 'term-line term-output';
+      outLine.innerHTML = step.out;
+      termBody.appendChild(outLine);
+      sIndex++;
+      setTimeout(nextLine, 500);
+    }, 250);
+  });
 }
-const tracePath = document.getElementById('tracePath');
-function animateTrace(){
-  tracePath.setAttribute('d', randTrace());
-  requestAnimationFrame(()=>{ setTimeout(animateTrace, 60); });
-}
-animateTrace();
+runTermScript();
 
 /* ============ EXPERIENCE CALCULATOR (live) ============ */
 const workDates = [
