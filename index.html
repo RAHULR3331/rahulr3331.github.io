@@ -1,530 +1,803 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rahul R - Web Developer & Data Analyst</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-  <link rel="manifest" href="images/site.webmanifest">
-    <style>
-    /* Small inline styles just so the new boxes look presentable without needing style.css edits */
-    .exp-title-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap }
-    .exp-info-boxes { display:flex; gap:1rem; align-items:center }
-    .exp-info { background:#111; color:#fff; padding:0.7rem 1rem; border-radius:8px; min-width:160px; text-align:center }
-    .exp-info-label { display:block; font-size:0.85rem; opacity:0.8 }
-    .exp-info-value { display:block; font-size:1.15rem; font-weight:700 }
-    .exp-info-sub { display:block; font-size:0.9rem; opacity:0.9 }
-    @media (max-width:700px){ .exp-info-boxes{flex-direction:column;align-items:flex-start} }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul R — Web Developer & Data Analyst</title>
+<meta name="description" content="Rahul R — Web developer and data analytics specialist. Laravel, PHP, Python, ML. Building software and reading data for a living.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#0A0E17;
+  --ink-2:#0F1524;
+  --ink-3:#141B2E;
+  --line: rgba(148,163,196,0.14);
+  --text:#E9EDF6;
+  --text-dim:#9AA6C0;
+  --text-faint:#5C6785;
+  --cyan:#5EE7FF;
+  --indigo:#6C7BFF;
+  --grad: linear-gradient(120deg,#5EE7FF 0%,#6C7BFF 60%,#B06CFF 100%);
+  --glass: rgba(20,27,46,0.55);
+  --glass-border: rgba(148,163,196,0.16);
+  --radius: 18px;
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+  --ease: cubic-bezier(.16,.84,.44,1);
+}
+html.light{
+  --ink:#F4F6FB;
+  --ink-2:#FFFFFF;
+  --ink-3:#EDF0F9;
+  --line: rgba(20,27,46,0.10);
+  --text:#0F1524;
+  --text-dim:#4A5578;
+  --text-faint:#8993B0;
+  --glass: rgba(255,255,255,0.6);
+  --glass-border: rgba(20,27,46,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.6;
+  overflow-x:hidden;
+  transition:background .4s var(--ease), color .4s var(--ease);
+}
+::selection{background:var(--indigo); color:#fff;}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+.container{max-width:1180px; margin:0 auto; padding:0 32px;}
+.eyebrow{
+  font-family:var(--font-mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--cyan); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+}
+.eyebrow::before{content:''; width:22px; height:1px; background:var(--cyan);}
+.section-head{max-width:640px; margin-bottom:56px;}
+.section-title{font-family:var(--font-display); font-size:clamp(30px,4vw,44px); font-weight:600; letter-spacing:-0.02em; line-height:1.1;}
+.section{padding:130px 0; position:relative;}
+.section-sub{color:var(--text-dim); font-size:16px; margin-top:14px; max-width:520px;}
+@media(max-width:700px){.section{padding:88px 0;}}
 
+/* ============ SCROLL PROGRESS ============ */
+#progress-bar{position:fixed; top:0; left:0; height:2px; width:0%; background:var(--grad); z-index:1000;}
+
+/* ============ CURSOR GLOW ============ */
+#cursor-glow{
+  position:fixed; width:420px; height:420px; border-radius:50%; pointer-events:none; z-index:1;
+  background:radial-gradient(circle, rgba(94,231,255,0.08) 0%, rgba(108,123,255,0.04) 40%, transparent 70%);
+  transform:translate(-50%,-50%); transition:opacity .3s ease; will-change:transform;
+}
+@media(max-width:900px){#cursor-glow{display:none;}}
+
+/* ============ NAVBAR ============ */
+.navbar{
+  position:fixed; top:18px; left:50%; transform:translateX(-50%); z-index:900;
+  width:min(920px,90%); background:var(--glass); backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid var(--glass-border); border-radius:100px; padding:10px 10px 10px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo{font-family:var(--font-mono); font-weight:600; font-size:14.5px; letter-spacing:.02em; display:flex; align-items:center; gap:8px;}
+.nav-logo .dot{width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 12px var(--cyan); display:inline-block;}
+.nav-menu{list-style:none; display:flex; align-items:center; gap:6px;}
+.nav-menu li a{
+  font-size:13.5px; color:var(--text-dim); padding:9px 15px; border-radius:100px; display:block;
+  transition:color .25s, background .25s;
+}
+.nav-menu li a:hover, .nav-menu li a.active{color:var(--text); background:var(--ink-3);}
+.nav-actions{display:flex; align-items:center; gap:8px;}
+.theme-toggle{
+  width:36px; height:36px; border-radius:50%; border:1px solid var(--glass-border); background:var(--ink-3);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text); font-size:13px;
+}
+.resume-nav-btn{
+  font-family:var(--font-mono); font-size:12.5px; background:var(--text); color:var(--ink)!important;
+  padding:9px 16px; border-radius:100px; display:flex; align-items:center; gap:7px; font-weight:600;
+  transition:transform .25s var(--ease);
+}
+.resume-nav-btn:hover{transform:scale(1.04);}
+.nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px;}
+.nav-toggle span{width:20px; height:2px; background:var(--text); border-radius:2px; transition:.3s;}
+@media(max-width:860px){
+  .nav-menu{position:fixed; top:78px; left:5%; width:90%; flex-direction:column; align-items:stretch;
+    background:var(--glass); backdrop-filter:blur(20px); border:1px solid var(--glass-border); border-radius:20px;
+    padding:14px; gap:2px; max-height:0; overflow:hidden; opacity:0; pointer-events:none; transition:.35s var(--ease);}
+  .nav-menu.active{max-height:500px; opacity:1; pointer-events:auto; padding:14px;}
+  .nav-menu li{width:100%;}
+  .nav-menu li a{padding:12px 16px;}
+  .nav-toggle{display:flex;}
+  #desktop-resume{display:none;}
+}
+
+/* ============ HERO ============ */
+.hero{min-height:100vh; display:flex; align-items:center; position:relative; padding-top:120px;}
+.hero-bg{position:absolute; inset:0; overflow:hidden; z-index:0;}
+.aurora{position:absolute; width:60vw; height:60vw; border-radius:50%; filter:blur(90px); opacity:.25;}
+.aurora-1{background:var(--cyan); top:-20%; left:-10%;}
+.aurora-2{background:var(--indigo); bottom:-25%; right:-10%;}
+.hero-grid{position:absolute; inset:0; background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px); background-size:64px 64px; mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 75%);}
+.hero-inner{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:60px; align-items:center;}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr; text-align:center;}}
+.hero-kicker{font-family:var(--font-mono); font-size:13px; color:var(--cyan); letter-spacing:.1em; text-transform:uppercase; margin-bottom:22px; display:inline-flex; align-items:center; gap:10px; padding:7px 14px 7px 10px; border:1px solid var(--glass-border); border-radius:100px; background:var(--glass);}
+.hero-kicker .pulse{width:7px; height:7px; border-radius:50%; background:#3ddc84; box-shadow:0 0 10px #3ddc84; animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero h1{font-family:var(--font-display); font-weight:700; font-size:clamp(46px,7vw,88px); line-height:.98; letter-spacing:-0.03em;}
+.hero h1 .accent{background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.hero-role{font-family:var(--font-mono); font-size:clamp(15px,2vw,19px); color:var(--text-dim); margin-top:22px; min-height:28px;}
+.hero-role .cursor-blink{display:inline-block; width:2px; height:1em; background:var(--cyan); margin-left:2px; vertical-align:middle; animation:blink 1s steps(1) infinite;}
+@keyframes blink{50%{opacity:0;}}
+.hero-desc{margin-top:22px; color:var(--text-dim); max-width:480px; font-size:16.5px;}
+@media(max-width:900px){.hero-desc{margin-inline:auto;}}
+.hero-buttons{display:flex; flex-wrap:wrap; gap:12px; margin-top:36px;}
+@media(max-width:900px){.hero-buttons{justify-content:center;}}
+.btn{font-family:var(--font-body); font-weight:600; font-size:14.5px; padding:14px 24px; border-radius:12px; display:inline-flex; align-items:center; gap:9px; cursor:pointer; border:1px solid transparent; transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s;}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--grad); color:#06090f;}
+.btn-primary:hover{box-shadow:0 10px 30px -8px rgba(94,231,255,.45); transform:translateY(-2px);}
+.btn-ghost{background:var(--glass); border:1px solid var(--glass-border); color:var(--text); backdrop-filter:blur(10px);}
+.btn-ghost:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px);}
+.hero-social{display:flex; gap:16px; margin-top:44px;}
+@media(max-width:900px){.hero-social{justify-content:center;}}
+.hero-social a{width:42px; height:42px; border-radius:50%; border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; color:var(--text-dim); transition:.25s;}
+.hero-social a:hover{color:var(--ink); background:var(--cyan); border-color:var(--cyan); transform:translateY(-3px);}
+
+/* Data trace signature visual */
+.trace-card{
+  position:relative; background:var(--glass); border:1px solid var(--glass-border); border-radius:24px;
+  padding:28px; backdrop-filter:blur(18px); box-shadow:0 30px 80px -30px rgba(0,0,0,.5);
+}
+.trace-head{display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-bottom:14px;}
+.trace-head .live{color:#3ddc84; display:flex; align-items:center; gap:6px;}
+.trace-svg{width:100%; height:auto; display:block;}
+.trace-path{fill:none; stroke:url(#traceGrad); stroke-width:2; stroke-linecap:round;}
+.trace-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px;}
+.trace-stat{background:var(--ink-3); border:1px solid var(--glass-border); border-radius:12px; padding:12px 10px; text-align:center;}
+.trace-stat .n{font-family:var(--font-display); font-size:21px; font-weight:600; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.trace-stat .l{font-family:var(--font-mono); font-size:10px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+.profile-chip{position:absolute; top:-18px; right:20px; display:flex; align-items:center; gap:10px; background:var(--ink-3); border:1px solid var(--glass-border); padding:6px 14px 6px 6px; border-radius:100px; box-shadow:0 10px 24px -10px rgba(0,0,0,.5);}
+.profile-chip img{width:34px; height:34px; border-radius:50%; object-fit:cover;}
+.profile-chip span{font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim);}
+
+/* scroll cue */
+.scroll-cue{position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--text-faint); font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;}
+.scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--text-faint),transparent); animation:scrollcue 2s infinite;}
+@keyframes scrollcue{0%{transform:scaleY(0); transform-origin:top;}50%{transform:scaleY(1); transform-origin:top;}50.1%{transform-origin:bottom;}100%{transform:scaleY(0); transform-origin:bottom;}}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr; gap:40px;}}
+.about-text p{color:var(--text-dim); font-size:16px; margin-bottom:16px;}
+.about-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:32px;}
+.stat-box{border:1px solid var(--line); border-radius:16px; padding:20px 14px; text-align:center; background:var(--ink-2);}
+.stat-box h3{font-family:var(--font-display); font-size:30px; font-weight:700; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.stat-box p{font-family:var(--font-mono); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.05em; margin-top:6px;}
+.focus-list{border:1px solid var(--line); border-radius:20px; padding:26px; background:var(--ink-2);}
+.focus-list h4{font-family:var(--font-mono); font-size:12px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.08em; margin-bottom:18px;}
+.focus-row{display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-top:1px solid var(--line);}
+.focus-row:first-of-type{border-top:none;}
+.focus-row .k{font-size:14.5px;}
+.focus-row .v{font-family:var(--font-mono); font-size:13px; color:var(--cyan);}
+
+/* ============ SKILLS ============ */
+.skill-filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;}
+.filter-chip{font-family:var(--font-mono); font-size:12.5px; padding:9px 16px; border-radius:100px; border:1px solid var(--glass-border); color:var(--text-dim); cursor:pointer; transition:.25s;}
+.filter-chip.active, .filter-chip:hover{color:var(--ink); background:var(--cyan); border-color:var(--cyan);}
+.skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;}
+.skill-card{border:1px solid var(--line); background:var(--ink-2); border-radius:18px; padding:22px; transition:transform .3s var(--ease), border-color .3s;}
+.skill-card:hover{transform:translateY(-4px); border-color:var(--glass-border);}
+.skill-card .top{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+.skill-card .name{font-weight:600; font-size:15px;}
+.skill-card .pct{font-family:var(--font-mono); font-size:12px; color:var(--cyan);}
+.bar-track{height:5px; border-radius:10px; background:var(--ink-3); overflow:hidden;}
+.bar-fill{height:100%; border-radius:10px; background:var(--grad); width:0%; transition:width 1.1s var(--ease);}
+.skill-card .cat{font-family:var(--font-mono); font-size:10.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; margin-top:12px;}
+
+/* ============ EXPERIENCE ============ */
+.exp-summary{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:56px;}
+@media(max-width:700px){.exp-summary{grid-template-columns:1fr;}}
+.exp-box{border:1px solid var(--line); border-radius:16px; padding:20px 22px; background:var(--ink-2); position:relative; overflow:hidden;}
+.exp-box::before{content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:var(--grad);}
+.exp-box .l{font-family:var(--font-mono); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em;}
+.exp-box .v{font-family:var(--font-display); font-size:24px; font-weight:600; margin-top:8px;}
+.exp-box .s{font-size:12px; color:var(--text-dim); margin-top:4px;}
+.timeline{position:relative; padding-left:32px; border-left:1px solid var(--line);}
+.exp-heading{font-family:var(--font-mono); font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-faint); margin:38px 0 18px;}
+.exp-heading:first-child{margin-top:0;}
+.exp-item{position:relative; padding-bottom:34px;}
+.exp-item::before{content:''; position:absolute; left:-37.5px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--ink); border:2px solid var(--cyan); box-shadow:0 0 0 4px var(--ink);}
+.exp-item h4{font-size:18px; font-weight:600; font-family:var(--font-display);}
+.exp-org{display:block; color:var(--text-dim); font-size:13.5px; margin-top:4px;}
+.exp-date{display:inline-block; font-family:var(--font-mono); font-size:11.5px; color:var(--cyan); margin-top:8px; padding:4px 10px; border:1px solid var(--glass-border); border-radius:100px;}
+.exp-item p{color:var(--text-dim); font-size:14.5px; margin-top:12px; max-width:560px;}
+.exp-item .tech{margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;}
+.exp-item .tech span{font-family:var(--font-mono); font-size:11px; color:var(--text-faint);}
+
+/* ============ PROJECTS ============ */
+.project-filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;}
+.projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:22px;}
+.project-card{border:1px solid var(--line); background:var(--ink-2); border-radius:20px; padding:28px; position:relative; overflow:hidden; transition:transform .35s var(--ease), border-color .35s;}
+.project-card:hover{transform:translateY(-6px); border-color:var(--glass-border);}
+.project-card::after{content:''; position:absolute; inset:0; opacity:0; background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%), rgba(94,231,255,.08), transparent 60%); transition:opacity .3s;}
+.project-card:hover::after{opacity:1;}
+.project-icon{width:46px; height:46px; border-radius:12px; background:var(--ink-3); display:flex; align-items:center; justify-content:center; color:var(--cyan); font-size:18px; margin-bottom:18px;}
+.project-card h3{font-family:var(--font-display); font-size:19px; font-weight:600; margin-bottom:10px;}
+.project-card p{color:var(--text-dim); font-size:14px; margin-bottom:18px;}
+.project-tech{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;}
+.project-tech span{font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim); border:1px solid var(--glass-border); padding:4px 10px; border-radius:100px;}
+.project-links{display:flex; gap:10px;}
+.project-links a{font-family:var(--font-mono); font-size:12px; display:flex; align-items:center; gap:6px; color:var(--text-dim); padding:9px 14px; border-radius:10px; border:1px solid var(--glass-border);}
+.project-links a:hover{color:var(--cyan); border-color:var(--cyan);}
+
+/* ============ EDUCATION ============ */
+.edu-timeline{display:flex; flex-direction:column; gap:0;}
+.edu-item{display:grid; grid-template-columns:140px 1fr; gap:28px; padding:28px 0; border-top:1px solid var(--line);}
+.edu-item:first-child{border-top:none;}
+@media(max-width:640px){.edu-item{grid-template-columns:1fr; gap:8px;}}
+.edu-date{font-family:var(--font-mono); font-size:13px; color:var(--cyan);}
+.edu-item h3{font-family:var(--font-display); font-size:19px; font-weight:600;}
+.edu-item h4{color:var(--text-dim); font-size:14px; font-weight:500; margin-top:4px;}
+.edu-item p{color:var(--text-faint); font-size:13.5px; margin-top:10px;}
+
+/* ============ RESUME BAND ============ */
+.resume-band{border:1px solid var(--glass-border); background:linear-gradient(120deg, rgba(94,231,255,.06), rgba(108,123,255,.06)); border-radius:24px; padding:52px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+.resume-band h3{font-family:var(--font-display); font-size:26px; font-weight:600;}
+.resume-band p{color:var(--text-dim); margin-top:8px; max-width:420px; font-size:14.5px;}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+@media(max-width:860px){.contact-grid{grid-template-columns:1fr; gap:40px;}}
+.availability{display:inline-flex; align-items:center; gap:9px; font-family:var(--font-mono); font-size:12.5px; color:#3ddc84; border:1px solid rgba(61,220,132,.3); background:rgba(61,220,132,.08); padding:8px 14px; border-radius:100px; margin-bottom:24px;}
+.availability .dot{width:7px; height:7px; border-radius:50%; background:#3ddc84; animation:pulse 2s infinite;}
+.contact-methods{margin-top:30px; display:flex; flex-direction:column; gap:4px;}
+.contact-method{display:flex; align-items:center; gap:16px; padding:16px 0; border-top:1px solid var(--line);}
+.contact-method:first-child{border-top:none;}
+.contact-method i{width:40px; height:40px; border-radius:10px; background:var(--ink-3); display:flex; align-items:center; justify-content:center; color:var(--cyan);}
+.contact-method h4{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-faint);}
+.contact-method a, .contact-method span{font-size:14.5px;}
+.form-group{margin-bottom:16px;}
+.form-group input, .form-group textarea{
+  width:100%; background:var(--ink-2); border:1px solid var(--line); border-radius:12px; padding:14px 16px;
+  color:var(--text); font-family:var(--font-body); font-size:14.5px; transition:border-color .25s;
+}
+.form-group input:focus, .form-group textarea:focus{outline:none; border-color:var(--cyan);}
+.form-group textarea{resize:vertical; min-height:110px;}
+.submit-btn{width:100%; justify-content:center; border:none;}
+
+/* ============ FOOTER ============ */
+.footer{border-top:1px solid var(--line); padding:36px 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+.footer p{color:var(--text-faint); font-size:13px; font-family:var(--font-mono);}
+.footer-social{display:flex; gap:14px;}
+.footer-social a{color:var(--text-dim); font-size:15px;}
+.footer-social a:hover{color:var(--cyan);}
+.back-to-top{width:40px; height:40px; border-radius:50%; border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; color:var(--text-dim); cursor:pointer;}
+.back-to-top:hover{color:var(--cyan); border-color:var(--cyan);}
+
+/* reveal animation base state */
+.reveal{opacity:0; transform:translateY(28px);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+}
+</style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#home" class="nav-logo">Rahul R</a>
-      <div class="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul class="nav-menu">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#education" class="nav-link">Education</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-        <li>
-          <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="nav-link resume-nav-btn">
-            <i class="fas fa-download"></i> Resume
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
 
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="hero-container">
-      <div class="hero-content">
-        <img src="images/profile.jpg" alt="Rahul R - Web Developer" class="profile-img">
-        <h1>Rahul R</h1>
-        <p class="hero-subtitle">Web Developer | Data Analytics Enthusiast</p>
-        <p class="hero-description">
-          Transforming data into insights and crafting digital experiences
-        </p>
-        <div class="hero-buttons">
-          <a href="#projects" class="btn btn-secondary">View My Work</a>
-          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-          <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-resume">
-            <i class="fas fa-download"></i> Download Resume
-          </a>
-        </div>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/rahul3339" target="_blank" title="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="https://github.com/RAHULR3331" target="_blank" title="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="mailto:rahulr.offic@gmail.com" title="Email">
-            <i class="fas fa-envelope"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>I'm a passionate web developer and data analytics enthusiast currently pursuing my Master's in Computer Science with a specialization in Data Analytics. With strong object-oriented programming and full-stack experience, I bridge the gap between technical implementation and data-driven decision making.</p>
-          <p>My journey spans responsive web applications and deep dataset explorations. I aim to leverage data for business solutions and better user experiences.</p>
-          <div class="resume-download-section">
-            <h3>Want to know more?</h3>
-            <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-outline resume-download-btn">
-              <i class="fas fa-file-pdf"></i> Download My Resume
-            </a>
-          </div>
-        </div>
-        <div class="stats">
-          <div class="stat-item">
-            <h3>5+</h3>
-            <p>Years Learning</p>
-          </div>
-          <div class="stat-item">
-            <h3>15+</h3>
-            <p>Projects Completed</p>
-          </div>
-          <div class="stat-item">
-            <h3>5+</h3>
-            <p>Technologies Mastered</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="section bg-light">
-    <div class="container">
-      <h2 class="section-title">Technical Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3><i class="fas fa-code"></i> Programming Languages</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">C</span>
-            <span class="skill-tag">Java</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <h3><i class="fas fa-database"></i> Database & Analytics</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">Oracle SQL</span>
-            <span class="skill-tag">Orange</span>
-            <span class="skill-tag">Jupyter Notebook</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <h3><i class="fas fa-globe"></i> Web Development</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">Laravel</span>
-            <span class="skill-tag">PHP</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <h3><i class="fas fa-tools"></i> Tools & Software</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">MS Excel</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">VS Code</span>
-            <span class="skill-tag">GitHub</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="section">
-    <div class="container">
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-header">
-            <i class="fas fa-chart-line project-icon"></i>
-            <h3>Cirrhosis (Liver Disease) EDA & Prediction</h3>
-          </div>
-          <p>Comprehensive data analysis and ML model development on a medical dataset for disease progression and risk assessment.</p>
-          <div class="project-tech">
-            <span>Python</span>
-            <span>Pandas</span>
-            <span>Scikit-learn</span>
-            <span>Jupyter</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn btn-small">Live Demo</a>
-            <a href="#" class="btn btn-small btn-outline">View Code</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-header">
-            <i class="fas fa-book project-icon"></i>
-            <h3>Chapter One - Laravel Bookstore</h3>
-          </div>
-          <p>Full-stack Laravel app with CRUD, authentication, admin panel, and payment integration. Responsive UI.</p>
-          <div class="project-tech">
-            <span>Laravel</span>
-            <span>PHP</span>
-            <span>MySQL</span>
-            <span>Bootstrap</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn btn-small">Live Demo</a>
-            <a href="#" class="btn btn-small btn-outline">View Code</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-header">
-            <i class="fas fa-brain project-icon"></i>
-            <h3>Indian Dance Forms Recognition</h3>
-          </div>
-          <p>Deep learning and computer vision project; transfer learning with VGG16/ResNet50 for accurate dance form classification.</p>
-          <div class="project-tech">
-            <span>Python</span>
-            <span>TensorFlow</span>
-            <span>OpenCV</span>
-            <span>VGG16</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn btn-small">Live Demo</a>
-            <a href="#" class="btn btn-small btn-outline">View Code</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Professional Experience -->
-  <section id="experience" class="section bg-dark">
-    <div class="container">
-      <div class="exp-title-row">
-        <h2 class="section-title">Professional Experience</h2>
-        <!-- New: three boxes showing totals -->
-        <div id="exp-info-boxes" class="exp-info-boxes">
-          <div class="exp-info" style="background:#111;color:#fff;">
-            <span class="exp-info-label">Total Experience</span>
-            <span id="exp-total-txt" class="exp-info-value">Calculating...</span>
-            <span class="exp-info-sub">(Work + Internship)</span>
-          </div>
-          <div class="exp-info" style="background:#0a4a7b;color:#fff;">
-            <span class="exp-info-label">Work Experience</span>
-            <span id="exp-work-txt" class="exp-info-value">Calculating...</span>
-            <span class="exp-info-sub">(Full-time)</span>
-          </div>
-          <div class="exp-info" style="background:#4a7b0a;color:#fff;">
-            <span class="exp-info-label">Internship</span>
-            <span id="exp-intern-txt" class="exp-info-value">Calculating...</span>
-            <span class="exp-info-sub">(Internships)</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-group">
-        <h3 class="exp-heading"><i class="fas fa-briefcase"></i> Work Experience</h3>
-        <div class="exp-item">
-          <h4>Software Development and Deployment Trainee</h4>
-          <span class="exp-org">Texila Educational and Management Services (P) Ltd · Coimbatore, Tamil Nadu · Full-time</span>
-          <span class="exp-date">Oct 2025 - Jun 2026</span>
-          <p>Developing scalable software, cross-functional collaboration. <br>Technologies: Laravel, HTML5, JavaScript.</p>
-        </div>
-        <div class="exp-item">
-          <h4>Software Developer</h4>
-          <span class="exp-org">Meta Soft · Coimbatore, Tamil Nadu · Full-time</span>
-          <span class="exp-date">Apr 2025 - Oct 2025</span>
-          <p>Development, testing, web automation.<br>Technologies: Laravel, HTML5, PHP.</p>
-        </div>
-      </div>
-
-      <div class="exp-group">
-        <h3 class="exp-heading"><i class="fas fa-user-graduate"></i> Internship Experience</h3>
-        <div class="exp-item">
-          <h4>Data Analyst Intern</h4>
-          <span class="exp-org">ICT Global Tech Pvt Ltd · Kochi, Kerala · Internship</span>
-          <span class="exp-date">Jan 2025 - Mar 2025</span>
-          <p>Statistical analysis, CRM optimization, hands-on pipelines.<br>Tools: Excel, Python.</p>
-        </div>
-        <div class="exp-item">
-          <h4>Full-stack Developer Intern</h4>
-          <span class="exp-org">Luminar Technolab · Kochi, Kerala · Internship</span>
-          <span class="exp-date">Aug 2022 - Mar 2023</span>
-          <p>Developed Angular web apps, enhanced UI/UX.<br>Technologies: Angular, HTML, CSS.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="education" class="section bg-light">
-    <div class="container">
-      <h2 class="section-title">Education</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Master of Science - Computer Science (Data Analytics)</h3>
-            <h4>Rajagiri College of Social Sciences</h4>
-            <span class="timeline-date">2023 - 2025</span>
-            <p>Specialized in Data Analytics, ML, Database, Big Data.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Bachelor of Science - Computer Science & Applications</h3>
-            <h4>Sri Krishna Arts & Science College</h4>
-            <span class="timeline-date">2019 - 2022</span>
-            <p>Programming, algorithms, software engineering fundamentals.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Higher Secondary Education</h3>
-            <h4>Government HSS Agali</h4>
-            <span class="timeline-date">2017 - 2019</span>
-            <p>Science stream, strong analytical & math foundations.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="container">
-      <h2 class="section-title">Let's Connect</h2>
-      <div class="contact-content">
-        <div class="contact-info">
-          <h3>Ready to collaborate?</h3>
-          <p>I'm interested in new opportunities and projects. Questions or want to collaborate? Reach out!</p>
-          <div class="contact-resume-section">
-            <h4>📄 Looking for my detailed experience?</h4>
-            <p>Download my resume for comprehensive background.</p>
-            <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-primary resume-contact-btn">
-              <i class="fas fa-download"></i> Download Resume (PDF)
-            </a>
-          </div>
-          <div class="contact-methods">
-            <div class="contact-method">
-              <i class="fas fa-envelope"></i>
-              <div>
-                <h4>Email</h4>
-                <a href="mailto:rahulr.offic@gmail.com">rahulr.offic@gmail.com</a>
-              </div>
-            </div>
-            <div class="contact-method">
-              <i class="fab fa-linkedin"></i>
-              <div>
-                <h4>LinkedIn</h4>
-                <a href="https://www.linkedin.com/in/rahul3339" target="_blank">linkedin.com/in/rahul3339</a>
-              </div>
-            </div>
-            <div class="contact-method">
-              <i class="fab fa-github"></i>
-              <div>
-                <h4>GitHub</h4>
-                <a href="https://github.com/RAHULR3331" target="_blank">github.com/RAHULR3331</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="contact-form">
-          <h3>Send me a message</h3>
-          <form action="https://api.web3forms.com/submit" method="POST" class="contact-form-element">
-            <input type="hidden" name="access_key" value="1eaa5a7d-26df-48b8-9618-5d5fc93a264a">
-            <input type="hidden" name="redirect" value="https://web3forms.com/success">
-            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-            <div class="form-group">
-              <input type="text" name="name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-              <input type="email" name="email" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-              <input type="text" name="subject" placeholder="Subject" required>
-            </div>
-            <div class="form-group">
-              <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="color:#fff;">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Floating Resume Download Button -->
-  <div class="floating-resume-btn">
-    <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" title="Download Resume">
-      <i class="fas fa-file-download"></i>
-    </a>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="#home" class="nav-logo"><span class="dot"></span>Rahul R</a>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="#home" class="nav-link active">Home</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#experience" class="nav-link">Experience</a></li>
+    <li><a href="#projects" class="nav-link">Projects</a></li>
+    <li><a href="#education" class="nav-link">Education</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fa-solid fa-moon" id="themeIcon"></i></div>
+    <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="resume-nav-btn" id="desktop-resume"><i class="fas fa-download"></i> Resume</a>
   </div>
+</nav>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Rahul R. All Rights Reserved. Built with passion and attention to detail.</p>
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-bg">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="container hero-inner">
+    <div>
+      <div class="hero-kicker"><span class="pulse"></span>Open to new opportunities</div>
+      <h1 class="reveal" id="heroHeading">Building software.<br>Reading <span class="accent">data</span>.</h1>
+      <p class="hero-role reveal" id="heroRole">&nbsp;</p>
+      <p class="hero-desc reveal">MSc Computer Science (Data Analytics) graduate and full-stack developer. I ship Laravel applications and turn messy datasets into decisions that hold up.</p>
+      <div class="hero-buttons reveal">
+        <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-arrow-down"></i> View my work</a>
+        <a href="#contact" class="btn btn-ghost"><i class="fa-regular fa-paper-plane"></i> Get in touch</a>
+        <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-ghost"><i class="fas fa-file-arrow-down"></i> Resume</a>
+      </div>
+      <div class="hero-social reveal">
+        <a href="https://www.linkedin.com/in/rahul3339" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/RAHULR3331" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:rahulr.offic@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      </div>
     </div>
-  </footer>
 
-  <!-- Scripts for interactivity and live experience box-->
- <script>
-    // Mobile Navigation Toggle (same logic as before)
-    document.addEventListener('DOMContentLoaded', function () {
-      const navToggle = document.querySelector('.nav-toggle');
-      const navMenu = document.querySelector('.nav-menu');
-      if (navToggle) {
-        navToggle.addEventListener('click', function () {
-          navMenu.classList.toggle('active');
-          this.classList.toggle('active');
-        });
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-          });
-        });
-        document.addEventListener('click', function (event) {
-          if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-          }
-        });
-      }
+    <div class="reveal">
+      <div class="trace-card">
+        <div class="profile-chip">
+          <img src="images/profile.jpg" alt="Rahul R">
+          <span>@RAHULR3331</span>
+        </div>
+        <div class="trace-head">
+          <span>signal.ts — dataset_variance</span>
+          <span class="live"><i class="fa-solid fa-circle" style="font-size:6px;"></i> live</span>
+        </div>
+        <svg class="trace-svg" viewBox="0 0 340 110" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="traceGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#5EE7FF"/>
+              <stop offset="100%" stop-color="#B06CFF"/>
+            </linearGradient>
+          </defs>
+          <path id="tracePath" class="trace-path" d="M0,70 L340,70"/>
+        </svg>
+        <div class="trace-stats">
+          <div class="trace-stat"><div class="n">15+</div><div class="l">Projects</div></div>
+          <div class="trace-stat"><div class="n">5+</div><div class="l">Technologies</div></div>
+          <div class="trace-stat"><div class="n">2+ yrs</div><div class="l">Experience</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">About</div>
+      <h2 class="section-title">A developer's precision, an analyst's curiosity.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a web developer and data analytics enthusiast, currently working full-time while having completed my Master's in Computer Science with a specialization in Data Analytics. I sit at the intersection of building the systems that generate data and interpreting what that data is trying to say.</p>
+        <p>On the development side, that means full-stack Laravel and PHP applications with clean, maintainable structure. On the analytics side, it means EDA, statistical analysis, and machine learning models that hold up outside the notebook. I care about the same thing in both: does this actually work, and does it actually help someone decide something.</p>
+        <div class="about-stats">
+          <div class="stat-box"><h3>5+</h3><p>Years Learning</p></div>
+          <div class="stat-box"><h3>15+</h3><p>Projects</p></div>
+          <div class="stat-box"><h3>5+</h3><p>Core Tech</p></div>
+        </div>
+      </div>
+      <div class="focus-list reveal">
+        <h4>Currently</h4>
+        <div class="focus-row"><span class="k">Role</span><span class="v">Software Dev &amp; Deployment Trainee</span></div>
+        <div class="focus-row"><span class="k">Company</span><span class="v">Texila Educational &amp; Mgmt Services</span></div>
+        <div class="focus-row"><span class="k">Based in</span><span class="v">Coimbatore, Tamil Nadu</span></div>
+        <div class="focus-row"><span class="k">Focus</span><span class="v">Laravel · Data Analytics</span></div>
+        <div class="focus-row"><span class="k">Education</span><span class="v">MSc CS — Data Analytics</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section" style="background:var(--ink-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Skills</div>
+      <h2 class="section-title">The stack I build and analyze with.</h2>
+    </div>
+    <div class="skill-filters reveal">
+      <div class="filter-chip active" data-filter="all">All</div>
+      <div class="filter-chip" data-filter="lang">Languages</div>
+      <div class="filter-chip" data-filter="web">Web Development</div>
+      <div class="filter-chip" data-filter="data">Data & Analytics</div>
+      <div class="filter-chip" data-filter="tools">Tools</div>
+    </div>
+    <div class="skills-grid reveal" id="skillsGrid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Experience</div>
+      <h2 class="section-title">Work history, calculated live.</h2>
+      <p class="section-sub">Totals below update in real time from actual start/end dates — not hardcoded.</p>
+    </div>
+    <div class="exp-summary reveal">
+      <div class="exp-box"><div class="l">Total Experience</div><div class="v" id="exp-total-txt">—</div><div class="s">Work + Internship</div></div>
+      <div class="exp-box"><div class="l">Work Experience</div><div class="v" id="exp-work-txt">—</div><div class="s">Full-time roles</div></div>
+      <div class="exp-box"><div class="l">Internships</div><div class="v" id="exp-intern-txt">—</div><div class="s">Internship roles</div></div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="exp-heading"><i class="fas fa-briefcase"></i> Work Experience</div>
+      <div class="exp-item">
+        <h4>Software Development and Deployment Trainee</h4>
+        <span class="exp-org">Texila Educational and Management Services (P) Ltd · Coimbatore, Tamil Nadu · Full-time</span>
+        <span class="exp-date">Oct 2025 — Jun 2026</span>
+        <p>Developing scalable software with cross-functional collaboration.</p>
+        <div class="tech"><span>Laravel</span><span>HTML5</span><span>JavaScript</span></div>
+      </div>
+      <div class="exp-item">
+        <h4>Software Developer</h4>
+        <span class="exp-org">Meta Soft · Coimbatore, Tamil Nadu · Full-time</span>
+        <span class="exp-date">Apr 2025 — Oct 2025</span>
+        <p>Development, testing, and web automation work.</p>
+        <div class="tech"><span>Laravel</span><span>HTML5</span><span>PHP</span></div>
+      </div>
+
+      <div class="exp-heading"><i class="fas fa-user-graduate"></i> Internship Experience</div>
+      <div class="exp-item">
+        <h4>Data Analyst Intern</h4>
+        <span class="exp-org">ICT Global Tech Pvt Ltd · Kochi, Kerala · Internship</span>
+        <span class="exp-date">Jan 2025 — Mar 2025</span>
+        <p>Statistical analysis and CRM optimization through hands-on data pipelines.</p>
+        <div class="tech"><span>Excel</span><span>Python</span></div>
+      </div>
+      <div class="exp-item">
+        <h4>Full-stack Developer Intern</h4>
+        <span class="exp-org">Luminar Technolab · Kochi, Kerala · Internship</span>
+        <span class="exp-date">Aug 2022 — Mar 2023</span>
+        <p>Developed Angular web apps and enhanced UI/UX.</p>
+        <div class="tech"><span>Angular</span><span>HTML</span><span>CSS</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section" style="background:var(--ink-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Projects</div>
+      <h2 class="section-title">Selected work.</h2>
+    </div>
+    <div class="project-filters reveal">
+      <div class="filter-chip active" data-pfilter="all">All</div>
+      <div class="filter-chip" data-pfilter="data">Data / ML</div>
+      <div class="filter-chip" data-pfilter="web">Web Dev</div>
+    </div>
+    <div class="projects-grid reveal" id="projectsGrid">
+      <div class="project-card" data-cat="data">
+        <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Cirrhosis (Liver Disease) EDA &amp; Prediction</h3>
+        <p>Comprehensive data analysis and ML model development on a medical dataset for disease progression and risk assessment.</p>
+        <div class="project-tech"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Jupyter</span></div>
+        <div class="project-links"><a href="#"><i class="fa-solid fa-play"></i> Live Demo</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
+      </div>
+      <div class="project-card" data-cat="web">
+        <div class="project-icon"><i class="fas fa-book"></i></div>
+        <h3>Chapter One — Laravel Bookstore</h3>
+        <p>Full-stack Laravel app with CRUD, authentication, admin panel, and payment integration. Fully responsive UI.</p>
+        <div class="project-tech"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
+        <div class="project-links"><a href="#"><i class="fa-solid fa-play"></i> Live Demo</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
+      </div>
+      <div class="project-card" data-cat="data">
+        <div class="project-icon"><i class="fas fa-brain"></i></div>
+        <h3>Indian Dance Forms Recognition</h3>
+        <p>Deep learning and computer vision project using transfer learning with VGG16 / ResNet50 for dance form classification.</p>
+        <div class="project-tech"><span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>VGG16</span></div>
+        <div class="project-links"><a href="#"><i class="fa-solid fa-play"></i> Live Demo</a><a href="#"><i class="fab fa-github"></i> Code</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Education</div>
+      <h2 class="section-title">Academic background.</h2>
+    </div>
+    <div class="edu-timeline reveal">
+      <div class="edu-item">
+        <div class="edu-date">2023 — 2025</div>
+        <div>
+          <h3>MSc Computer Science — Data Analytics</h3>
+          <h4>Rajagiri College of Social Sciences</h4>
+          <p>Specialized in Data Analytics, Machine Learning, Databases, and Big Data.</p>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-date">2019 — 2022</div>
+        <div>
+          <h3>BSc Computer Science &amp; Applications</h3>
+          <h4>Sri Krishna Arts &amp; Science College</h4>
+          <p>Programming, algorithms, and software engineering fundamentals.</p>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-date">2017 — 2019</div>
+        <div>
+          <h3>Higher Secondary Education</h3>
+          <h4>Government HSS Agali</h4>
+          <p>Science stream — strong analytical and mathematical foundations.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-band reveal" style="margin-top:70px;">
+      <div>
+        <h3>Want the full picture?</h3>
+        <p>Download the complete resume for detailed role descriptions and contact information.</p>
+      </div>
+      <a href="Rahul R Resume.pdf" download="Rahul_R_Resume.pdf" class="btn btn-primary"><i class="fas fa-file-arrow-down"></i> Download Resume (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="background:var(--ink-2); border-top:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Contact</div>
+      <h2 class="section-title">Let's build something.</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="availability"><span class="dot"></span>Available for new opportunities</div>
+        <p style="color:var(--text-dim); font-size:15.5px; max-width:420px;">I'm interested in web development and data analytics roles. Questions, project ideas, or just want to say hi? Reach out.</p>
+        <div class="contact-methods">
+          <div class="contact-method"><i class="fas fa-envelope"></i><div><h4>Email</h4><a href="mailto:rahulr.offic@gmail.com">rahulr.offic@gmail.com</a></div></div>
+          <div class="contact-method"><i class="fab fa-linkedin-in"></i><div><h4>LinkedIn</h4><a href="https://www.linkedin.com/in/rahul3339" target="_blank">linkedin.com/in/rahul3339</a></div></div>
+          <div class="contact-method"><i class="fab fa-github"></i><div><h4>GitHub</h4><a href="https://github.com/RAHULR3331" target="_blank">github.com/RAHULR3331</a></div></div>
+        </div>
+      </div>
+      <form action="https://api.web3forms.com/submit" method="POST" class="reveal">
+        <input type="hidden" name="access_key" value="1eaa5a7d-26df-48b8-9618-5d5fc93a264a">
+        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+        <div class="form-group"><input type="text" name="name" placeholder="Your name" required></div>
+        <div class="form-group"><input type="email" name="email" placeholder="Your email" required></div>
+        <div class="form-group"><input type="text" name="subject" placeholder="Subject" required></div>
+        <div class="form-group"><textarea name="message" placeholder="Your message" rows="5" required></textarea></div>
+        <button type="submit" class="btn btn-primary submit-btn"><i class="fa-regular fa-paper-plane"></i> Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer container">
+  <p>© 2026 Rahul R. All rights reserved.</p>
+  <div class="footer-social">
+    <a href="https://www.linkedin.com/in/rahul3339" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://github.com/RAHULR3331" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="mailto:rahulr.offic@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+  <div class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></div>
+</footer>
+
+<script>
+/* ============ THEME TOGGLE ============ */
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+function setTheme(light){
+  document.documentElement.classList.toggle('light', light);
+  themeIcon.className = light ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+}
+let isLight = false;
+themeToggle.addEventListener('click', ()=>{ isLight = !isLight; setTheme(isLight); });
+
+/* ============ MOBILE NAV ============ */
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+navToggle.addEventListener('click', ()=>{ navMenu.classList.toggle('active'); navToggle.classList.toggle('active'); });
+document.querySelectorAll('.nav-link').forEach(link=>{
+  link.addEventListener('click', ()=>{ navMenu.classList.remove('active'); navToggle.classList.remove('active'); });
+});
+
+/* ============ SCROLL PROGRESS + ACTIVE NAV ============ */
+const progressBar = document.getElementById('progress-bar');
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', ()=>{
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progressBar.style.width = scrolled + '%';
+
+  let current = '';
+  sections.forEach(sec=>{
+    if(window.scrollY >= sec.offsetTop - 220) current = sec.getAttribute('id');
+  });
+  navLinks.forEach(l=>{
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+
+/* ============ CURSOR GLOW ============ */
+const glow = document.getElementById('cursor-glow');
+window.addEventListener('mousemove', e=>{
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+});
+
+/* ============ TYPING EFFECT ============ */
+const roles = ['Full-Stack Web Developer', 'Data Analytics Specialist', 'Laravel & PHP Engineer', 'ML / EDA Practitioner'];
+const roleEl = document.getElementById('heroRole');
+let ri = 0, ci = 0, deleting = false;
+function typeLoop(){
+  const word = roles[ri];
+  if(!deleting){
+    ci++;
+    roleEl.innerHTML = word.slice(0,ci) + '<span class="cursor-blink"></span>';
+    if(ci === word.length){ deleting = true; setTimeout(typeLoop, 1400); return; }
+  } else {
+    ci--;
+    roleEl.innerHTML = word.slice(0,ci) + '<span class="cursor-blink"></span>';
+    if(ci === 0){ deleting = false; ri = (ri+1) % roles.length; }
+  }
+  setTimeout(typeLoop, deleting ? 40 : 65);
+}
+typeLoop();
+
+/* ============ TRACE PATH DRAW ============ */
+function randTrace(){
+  let d = 'M0,70';
+  for(let x=0;x<=340;x+=17){
+    const y = 70 + Math.sin(x/22 + performance.now()/900) * 24 + (Math.random()*6-3);
+    d += ` L${x},${Math.max(14,Math.min(96,y)).toFixed(1)}`;
+  }
+  return d;
+}
+const tracePath = document.getElementById('tracePath');
+function animateTrace(){
+  tracePath.setAttribute('d', randTrace());
+  requestAnimationFrame(()=>{ setTimeout(animateTrace, 60); });
+}
+animateTrace();
+
+/* ============ EXPERIENCE CALCULATOR (live) ============ */
+const workDates = [
+  { type:'intern', from:'2022-08-01', to:'2023-03-31' },
+  { type:'intern', from:'2025-01-01', to:'2025-03-31' },
+  { type:'work', from:'2025-04-01', to:'2025-10-16' },
+  { type:'work', from:'2025-10-16', to:null }
+];
+function mergeAndSum(intervals){
+  if(!intervals.length) return 0;
+  const conv = intervals.map(i=>{
+    const s = new Date(i[0]).getTime();
+    const e = i[1] ? new Date(i[1]).getTime() : Date.now();
+    return [s,e];
+  }).sort((a,b)=>a[0]-b[0]);
+  const merged = [];
+  for(const [s,e] of conv){
+    if(!merged.length || merged[merged.length-1][1] < s) merged.push([s,e]);
+    else merged[merged.length-1][1] = Math.max(merged[merged.length-1][1], e);
+  }
+  return merged.reduce((sum,[s,e])=>sum+(e-s),0);
+}
+function msToYearsMonths(ms){
+  const msPerYear = 365.25*24*60*60*1000;
+  const msPerMonth = 30.44*24*60*60*1000;
+  const years = Math.floor(ms/msPerYear);
+  const months = Math.floor((ms % msPerYear) / msPerMonth);
+  return {years, months};
+}
+function prettyTxt({years, months}){
+  let txt = '';
+  if(years>0) txt += `${years}y `;
+  txt += `${months}m`;
+  return txt;
+}
+function updateExpBox(){
+  const workIntervals = workDates.filter(d=>d.type==='work').map(d=>[d.from,d.to]);
+  const internIntervals = workDates.filter(d=>d.type==='intern').map(d=>[d.from,d.to]);
+  const workMs = mergeAndSum(workIntervals);
+  const internMs = mergeAndSum(internIntervals);
+  const totalMs = mergeAndSum(workDates.map(d=>[d.from,d.to]));
+  document.getElementById('exp-work-txt').textContent = prettyTxt(msToYearsMonths(workMs));
+  document.getElementById('exp-intern-txt').textContent = prettyTxt(msToYearsMonths(internMs));
+  document.getElementById('exp-total-txt').textContent = prettyTxt(msToYearsMonths(totalMs));
+}
+updateExpBox();
+setInterval(updateExpBox, 3600000);
+
+/* ============ SKILLS DATA + RENDER ============ */
+const skillsData = [
+  {name:'JavaScript', pct:82, cat:'lang'},
+  {name:'Python', pct:85, cat:'lang'},
+  {name:'Java', pct:70, cat:'lang'},
+  {name:'C', pct:68, cat:'lang'},
+  {name:'Laravel', pct:88, cat:'web'},
+  {name:'PHP', pct:85, cat:'web'},
+  {name:'HTML5 / CSS3', pct:90, cat:'web'},
+  {name:'MySQL', pct:80, cat:'data'},
+  {name:'Oracle SQL', pct:72, cat:'data'},
+  {name:'Pandas / Scikit-learn', pct:78, cat:'data'},
+  {name:'Orange', pct:70, cat:'data'},
+  {name:'Jupyter Notebook', pct:83, cat:'data'},
+  {name:'MS Excel', pct:88, cat:'tools'},
+  {name:'Git / GitHub', pct:84, cat:'tools'},
+  {name:'VS Code', pct:90, cat:'tools'},
+];
+const catLabels = {lang:'Programming Language', web:'Web Development', data:'Data & Analytics', tools:'Tools & Software'};
+const skillsGrid = document.getElementById('skillsGrid');
+function renderSkills(filter){
+  skillsGrid.innerHTML = '';
+  skillsData.filter(s=> filter==='all' || s.cat===filter).forEach(s=>{
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.innerHTML = `
+      <div class="top"><span class="name">${s.name}</span><span class="pct">${s.pct}%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${s.pct}%"></div></div>
+      <div class="cat">${catLabels[s.cat]}</div>`;
+    skillsGrid.appendChild(card);
+  });
+}
+renderSkills('all');
+document.querySelectorAll('.filter-chip[data-filter]').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-chip[data-filter]').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    renderSkills(chip.dataset.filter);
+  });
+});
+
+/* ============ PROJECT FILTER ============ */
+document.querySelectorAll('.filter-chip[data-pfilter]').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-chip[data-pfilter]').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    const f = chip.dataset.pfilter;
+    document.querySelectorAll('.project-card').forEach(card=>{
+      card.style.display = (f==='all' || card.dataset.cat===f) ? '' : 'none';
     });
+  });
+});
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const el = document.querySelector(this.getAttribute('href'));
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
+/* ============ BACK TO TOP ============ */
+document.getElementById('backToTop').addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
-    // Experience data: each entry has a type: 'work' or 'intern'
-    const workDates = [
-      { type: 'intern', from: '2022-08-01', to: '2023-03-31' }, // Luminar Technolab Internship
-      { type: 'intern', from: '2025-01-01', to: '2025-03-31' }, // ICT Global Tech Internship
-      { type: 'work', from: '2025-04-01', to: '2025-10-16' }, // Meta Soft
-      { type: 'work', from: '2025-10-16', to: null } // Texila (ongoing)
-    ];
+/* ============ GSAP SCROLL REVEALS ============ */
+gsap.registerPlugin(ScrollTrigger);
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  gsap.to(el, {
+    opacity:1, y:0, duration:0.9, ease:'power3.out',
+    scrollTrigger:{ trigger: el, start:'top 88%' }
+  });
+});
+// hero elements animate on load regardless of scroll position
+gsap.to('#heroHeading', {opacity:1, y:0, duration:1, ease:'power3.out', delay:0.1});
+gsap.to('#heroRole', {opacity:1, y:0, duration:1, ease:'power3.out', delay:0.25});
+document.querySelectorAll('.hero .reveal').forEach((el,i)=>{
+  gsap.to(el, {opacity:1, y:0, duration:1, ease:'power3.out', delay:0.1 + i*0.08});
+});
 
-    // Helper: merge overlapping intervals and compute total milliseconds
-    function mergeAndSum(intervals) {
-      if (!intervals.length) return 0;
-      // convert to [startMs, endMs]
-      const conv = intervals.map(i => {
-        const s = new Date(i[0]).getTime();
-        const e = i[1] ? new Date(i[1]).getTime() : Date.now();
-        return [s, e];
-      }).sort((a,b)=>a[0]-b[0]);
-
-      const merged = [];
-      for (const [s,e] of conv) {
-        if (!merged.length || merged[merged.length-1][1] < s) {
-          merged.push([s,e]);
-        } else {
-          merged[merged.length-1][1] = Math.max(merged[merged.length-1][1], e);
-        }
-      }
-
-      return merged.reduce((sum,[s,e]) => sum + (e - s), 0);
-    }
-
-    // Convert milliseconds to {years, months}
-    function msToYearsMonths(ms) {
-      const msPerYear = 365.25*24*60*60*1000;
-      const msPerMonth = 30.44*24*60*60*1000;
-      const years = Math.floor(ms / msPerYear);
-      const months = Math.floor((ms % msPerYear) / msPerMonth);
-      return { years, months };
-    }
-
-    function calcTotals(data) {
-      // separate by type
-      const workIntervals = data.filter(d=>d.type==='work').map(d=>[d.from, d.to]);
-      const internIntervals = data.filter(d=>d.type==='intern').map(d=>[d.from, d.to]);
-
-      const workMs = mergeAndSum(workIntervals);
-      const internMs = mergeAndSum(internIntervals);
-      const totalMs = mergeAndSum(data.map(d=>[d.from,d.to]));
-
-      return {
-        work: msToYearsMonths(workMs),
-        intern: msToYearsMonths(internMs),
-        total: msToYearsMonths(totalMs)
-      };
-    }
-
-    function prettyTxt({ years, months }){
-      let txt = '';
-      if (years>0) txt += `${years} year${years>1? 's':''} `;
-      txt += `${months} month${months!==1? 's':''}`;
-      return txt;
-    }
-
-    function updateExpBox() {
-      const totals = calcTotals(workDates);
-      document.getElementById('exp-work-txt').textContent = prettyTxt(totals.work);
-      document.getElementById('exp-intern-txt').textContent = prettyTxt(totals.intern);
-      document.getElementById('exp-total-txt').textContent = prettyTxt(totals.total);
-    }
-
-    // initial update and hourly refresh
-    updateExpBox();
-    setInterval(updateExpBox, 60*60*1000);
-
-    // Navigation link active state on scroll + floating button logic (kept simple)
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav-link');
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= (sectionTop - 200)) {
-          current = section.getAttribute('id');
-        }
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === current) {
-          link.classList.add('active');
-        }
-      });
-      const floatingBtn = document.querySelector('.floating-resume-btn');
-      if (window.scrollY > 500) {
-        floatingBtn.style.display = 'block';
-      } else {
-        floatingBtn.style.display = 'none';
-      }
-    });
-  </script>
+// animate skill bars into view once
+ScrollTrigger.create({
+  trigger:'#skills', start:'top 70%',
+  onEnter:()=>{ document.querySelectorAll('.bar-fill').forEach(b=> b.style.width = b.style.width); }
+});
+</script>
 </body>
 </html>
